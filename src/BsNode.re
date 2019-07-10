@@ -27,8 +27,7 @@ module Fs = {
   };
 
   [@bs.module "fs"]
-  external readdir: (string, callback(array(string)) => unit) => unit =
-    "readdir";
+  external readdir: (string, callback(array(string))) => unit = "readdir";
 
   [@bs.module "fs"]
   external stat: (string, callback(Stat.t)) => unit = "stat";
