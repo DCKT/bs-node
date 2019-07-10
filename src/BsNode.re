@@ -1,6 +1,6 @@
-module Fs = {
-  type callbackError = Js.Nullable.t(Js.Exn.t) => unit;
+type callback('a) = (Js.Nullable.t(Js.Exn.t), 'a) => unit;
 
+module Fs = {
   module Stream = {
     type t;
 
@@ -13,22 +13,32 @@ module Fs = {
     [@bs.send.pipe: t] external on: (string, unit => unit) => t = "on";
   };
 
-  type stream;
-  type stats;
+  module Stat = {
+    type t;
 
-  [@bs.get] external size: stats => float = "size";
+    [@bs.get] external size: t => float = "size";
+  };
+
+  module LStat = {
+    type t;
+
+    [@bs.send] external isDirectory: (t, unit) => bool = "isDirectory";
+    [@bs.send] external isFile: (t, unit) => bool = "isFile";
+  };
 
   [@bs.module "fs"]
-  external readdir:
-    (string, (Js.Nullable.t(Js.Exn.t), array(string)) => unit) => unit =
+  external readdir: (string, callback(array(string)) => unit) => unit =
     "readdir";
 
   [@bs.module "fs"]
-  external stat: (string, (Js.Nullable.t(Js.Exn.t), stats) => unit) => unit =
-    "stat";
+  external stat: (string, callback(Stat.t)) => unit = "stat";
 
   [@bs.module "fs"]
-  external unlink: (string, callbackError) => unit = "unlink";
+  external unlink: (string, Js.Nullable.t(Js.Exn.t) => unit) => unit =
+    "unlink";
+
+  [@bs.module "fs"]
+  external lstat: (string, callback(LStat.t)) => unit = "lstat";
 };
 
 module Path = {
