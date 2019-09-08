@@ -1,0 +1,1 @@
+type callback('a) = (Js.Nullable.t(Js.Exn.t), 'a) => unit;
