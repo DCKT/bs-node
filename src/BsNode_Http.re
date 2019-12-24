@@ -3,6 +3,13 @@ module Http = {
 
   module Request = {
     type t;
+
+    [@bs.get] external url: t => string = "url";
+    [@bs.get] external path: t => string = "path";
+    [@bs.get] external rawHeaders: t => array(string) = "path";
+    [@bs.get] external getHeader: t => option(string) = "getHeader";
+    [@bs.send] external setHeader: (t, string, string) => unit = "setHeader";
+    [@bs.send] external removeHeader: (t, string) => unit = "removeHeader";
   };
 
   module Response = {
@@ -19,4 +26,6 @@ module Http = {
   [@bs.module "http"]
   external createServer: ((Request.t, Response.t) => Response.end_) => server =
     "createServer";
+
+  [@bs.send] external listen: (server, int, unit => unit) => unit = "listen";
 };

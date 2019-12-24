@@ -6,10 +6,14 @@
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world"
   },
-  "keywords": ["Node.js", "bindings", "BuckleScript"],
+  "keywords": [
+    "Node.js",
+    "bindings",
+    "BuckleScript"
+  ],
   "author": "Thomas Deconinck",
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "5.0.6"
+    "bs-platform": "7.0.1"
   }
 }
