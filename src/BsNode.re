@@ -1,4 +1,4 @@
-include BsNode_Fs;
-include BsNode_Http;
-include BsNode_Path;
-include BsNode_Os;
+module Fs = BsNode__Fs;
+module Http = BsNode__Http;
+module Path = BsNode__Path;
+module Os = BsNode__Os;

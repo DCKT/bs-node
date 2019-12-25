@@ -1,5 +1,14 @@
-open BsNode_Http;
+open BsNode;
 open Belt;
+
+let htmlFile: ref(option(string)) = ref(None);
+
+Fs.readFile("./index.html", (err, data) =>
+  switch (err->Js.Nullable.toOption) {
+  | Some(err) => Js.log2("Unable to read\n", err)
+  | None => htmlFile := Some(data)
+  }
+);
 
 let server =
   Http.createServer((req, res) => {
@@ -9,6 +18,10 @@ let server =
     switch (path) {
     | "/" => res->Http.Response.endString("Index")
     | "/hello" => res->Http.Response.endString("Hello")
+    | "/html" =>
+      res->Http.Response.endString(
+        (htmlFile^)->Option.mapWithDefault("no file", r => r),
+      )
     | _ => res->Http.Response.endString("any")
     };
   });
