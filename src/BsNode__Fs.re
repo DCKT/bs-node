@@ -1,5 +1,7 @@
 open BsNode__Types;
 
+let dirname = [%raw "__dirname"];
+
 module Stream = {
   type t;
 
