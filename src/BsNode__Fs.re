@@ -27,6 +27,15 @@ module LStat = {
   [@bs.send] external isFile: (t, unit) => bool = "isFile";
 };
 
+module Dirent = {
+  type t;
+
+  [@bs.send] external isDirectory: (t, unit) => bool = "isDirectory";
+  [@bs.send] external isFile: (t, unit) => bool = "isFile";
+  [@bs.get] external nameAsString: t => string = "name";
+  [@bs.get] external nameAsBuffer: t => Buffer.t = "name";
+};
+
 [@bs.module "fs"]
 external readdir: (string, callback(array(string))) => unit = "readdir";
 
@@ -45,6 +54,11 @@ external readdirOptions:
 [@bs.module "fs"]
 external readdirWithOptions:
   (string, readdirOptions, callback(array(string))) => unit =
+  "readdir";
+
+[@bs.module "fs"]
+external readdirWithFileTypes:
+  (string, readdirOptions, callback(array(Dirent.t))) => unit =
   "readdir";
 
 [@bs.module "fs"]
