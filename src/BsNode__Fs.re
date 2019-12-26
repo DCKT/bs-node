@@ -30,6 +30,19 @@ module LStat = {
 [@bs.module "fs"]
 external readdir: (string, callback(array(string))) => unit = "readdir";
 
+type readdirOptions;
+
+[@bs.obj]
+external readdirOptions:
+  (~encoding: [@bs.string] [ | `utf8 | `ascii]=?, ~withFileTypes: bool=?) =>
+  readdirOptions =
+  "";
+
+[@bs.module "fs"]
+external readdirWithOptions:
+  (string, readdirOptions, callback(string)) => unit =
+  "readFile";
+
 [@bs.module "fs"]
 external readFile: (string, callback(string)) => unit = "readFile";
 
@@ -37,8 +50,11 @@ type readFileOptions;
 
 [@bs.obj]
 external readFileOptions:
-  (~encoding: [@bs.string] [ | `utf8 | `ascii]=?, ~withFileTypes: bool=?) =>
-  readFileOptions =
+  (
+    ~encoding: [@bs.string] [ | `utf8 | `ascii]=?,
+    ~flag: [@bs.string] [ | `_r | `_ax | `_a | `_as | `_w | `_wx]=?
+  ) =>
+  readdirOptions =
   "";
 
 [@bs.module "fs"]
