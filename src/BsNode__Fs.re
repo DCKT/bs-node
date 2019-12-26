@@ -33,6 +33,19 @@ external readdir: (string, callback(array(string))) => unit = "readdir";
 [@bs.module "fs"]
 external readFile: (string, callback(string)) => unit = "readFile";
 
+type readFileOptions;
+
+[@bs.obj]
+external readFileOptions:
+  (~encoding: [@bs.string] [ | `utf8 | `ascii]=?, ~withFileTypes: bool=?) =>
+  readFileOptions =
+  "";
+
+[@bs.module "fs"]
+external readFileWithOptions:
+  (string, readFileOptions, callback(string)) => unit =
+  "readFile";
+
 [@bs.module "fs"] external stat: (string, callback(Stat.t)) => unit = "stat";
 
 [@bs.module "fs"]
