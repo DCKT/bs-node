@@ -44,8 +44,8 @@ external readdirOptions:
 
 [@bs.module "fs"]
 external readdirWithOptions:
-  (string, readdirOptions, callback(string)) => unit =
-  "readFile";
+  (string, readdirOptions, callback(array(string))) => unit =
+  "readdir";
 
 [@bs.module "fs"]
 external readFile: (string, callback(string)) => unit = "readFile";
