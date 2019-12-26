@@ -34,7 +34,11 @@ type readdirOptions;
 
 [@bs.obj]
 external readdirOptions:
-  (~encoding: [@bs.string] [ | `utf8 | `ascii]=?, ~withFileTypes: bool=?) =>
+  (
+    ~encoding: [@bs.string] [ | `utf8 | `ascii]=?,
+    ~withFileTypes: bool=?,
+    unit
+  ) =>
   readdirOptions =
   "";
 
@@ -52,7 +56,8 @@ type readFileOptions;
 external readFileOptions:
   (
     ~encoding: [@bs.string] [ | `utf8 | `ascii]=?,
-    ~flag: [@bs.string] [ | `_r | `_ax | `_a | `_as | `_w | `_wx]=?
+    ~flag: [@bs.string] [ | `_r | `_ax | `_a | `_as | `_w | `_wx]=?,
+    unit
   ) =>
   readdirOptions =
   "";
