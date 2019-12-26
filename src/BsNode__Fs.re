@@ -30,8 +30,8 @@ module LStat = {
 module Dirent = {
   type t;
 
-  [@bs.send] external isDirectory: (t, unit) => bool = "isDirectory";
-  [@bs.send] external isFile: (t, unit) => bool = "isFile";
+  [@bs.send] external isDirectory: t => bool = "isDirectory";
+  [@bs.send] external isFile: t => bool = "isFile";
   [@bs.get] external nameAsString: t => string = "name";
   [@bs.get] external nameAsBuffer: t => Buffer.t = "name";
 };
